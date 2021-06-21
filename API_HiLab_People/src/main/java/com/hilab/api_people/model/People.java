@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.hilab.api_people.model.util.Status;
@@ -31,14 +32,15 @@ public class People implements Serializable{
 	
 	private Date birthDate;
 	
+	@DBRef(lazy = true)
 	private Address address;
 	
+	@DBRef(lazy = true)
 	private Phone phone;
 	
 	public People() {}
 
 	public People(String id, Status status, String givenName, String familyName, Date birthDate) {
-		super();
 		this.id = id;
 		this.status = status;
 		this.givenName = givenName;

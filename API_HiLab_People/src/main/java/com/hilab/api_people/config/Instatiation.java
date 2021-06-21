@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Configuration;
 
 import com.hilab.api_people.model.Address;
 import com.hilab.api_people.model.People;
+import com.hilab.api_people.model.Phone;
 import com.hilab.api_people.model.util.Status;
 import com.hilab.api_people.model.util.Type;
 import com.hilab.api_people.repository.AddressRepository;
 import com.hilab.api_people.repository.PeopleRepository;
+import com.hilab.api_people.repository.PhoneRepository;
 
 @Configuration
 public class Instatiation implements CommandLineRunner{
@@ -23,6 +25,9 @@ public class Instatiation implements CommandLineRunner{
 	
 	@Autowired
 	private AddressRepository addressRepository;
+	
+	@Autowired
+	private PhoneRepository phoneRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -32,6 +37,7 @@ public class Instatiation implements CommandLineRunner{
 		 
 		 peopleRepository.deleteAll();
 		 addressRepository.deleteAll();
+		 phoneRepository.deleteAll();
 		 
 		 People leonardo = new People(null, Status.ACTIVE, "Leonardo", "Santos", formatDate.parse("20/03/1996"));
 		 People lucas = new People(null, Status.INACTIVE, "Lucas", "Montano", formatDate.parse("08/10/1990"));
@@ -39,10 +45,18 @@ public class Instatiation implements CommandLineRunner{
 		 
 		 peopleRepository.saveAll(Arrays.asList(leonardo, lucas, maria));
 		 
-		 Address adLeo = new Address(null, Type.DELIVERY, (long) 71725702, "Distrito Federal", "Candangolândia", "Qr07",
-				 130, "Apartamento", "Distrito ferdeal", leonardo);
+		 Address adLeo = new Address(null, Type.DELIVERY, (long) 71722745, "Distrito Federal", "Ceilândia", "CNM",
+				 15, "Casa", "Distrito ferdeal", leonardo);
 		 
-		 addressRepository.saveAll(Arrays.asList(adLeo));
+		 Phone telLeo = new Phone(null, Arrays.asList("6198562312"));
+		 
+		 addressRepository.save(adLeo);
+		 phoneRepository.save(telLeo);
+		 
+		 leonardo.setAddress(adLeo);
+		 leonardo.setPhone(telLeo);
+		 
+		 peopleRepository.save(leonardo);
 		 
 	}
 

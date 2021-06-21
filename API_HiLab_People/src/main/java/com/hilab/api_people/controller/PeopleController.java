@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.hilab.api_people.dto.PeopleDTO;
 import com.hilab.api_people.model.Address;
 import com.hilab.api_people.model.People;
+import com.hilab.api_people.model.Phone;
 import com.hilab.api_people.service.PeopleService;
 
 @RestController
@@ -67,5 +68,11 @@ public class PeopleController {
 	public ResponseEntity<Address> findAddress(@PathVariable String id) {
 		People obj = peopleService.findById(id);
 		return ResponseEntity.ok().body(obj.getAddress());
+	}
+	
+	@GetMapping("/{id}/phones")
+	public ResponseEntity<Phone> findPhone(@PathVariable String id) {
+		People obj = peopleService.findById(id);
+		return ResponseEntity.ok().body(obj.getPhone());
 	}
 }
