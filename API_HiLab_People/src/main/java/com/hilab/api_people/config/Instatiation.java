@@ -1,4 +1,4 @@
-package com.hilab.api_people.config;
+	package com.hilab.api_people.config;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -48,13 +48,13 @@ public class Instatiation implements CommandLineRunner{
 		 Address adLeo = new Address(null, Type.DELIVERY, (long) 71722745, "Distrito Federal", "Ceilândia", "CNM",
 				 15, "Casa", "Distrito ferdeal", leonardo);
 		 
-		 Phone telLeo = new Phone(null, Arrays.asList("6198562312"));
+		 Phone phoneLeo = new Phone(null, Arrays.asList("6198562312"));
 		 
 		 addressRepository.save(adLeo);
-		 phoneRepository.save(telLeo);
+		 phoneRepository.save(phoneLeo);
 		 
 		 leonardo.setAddress(adLeo);
-		 leonardo.setPhone(telLeo);
+		 leonardo.setPhone(phoneLeo);
 		 
 		 peopleRepository.save(leonardo);
 		 

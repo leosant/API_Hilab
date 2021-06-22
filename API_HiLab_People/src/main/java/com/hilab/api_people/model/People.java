@@ -3,6 +3,8 @@ package com.hilab.api_people.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -26,8 +28,10 @@ public class People implements Serializable{
 	
 	private Status status;
 	
+	@NotEmpty(message = "Inform the given name")
 	private String givenName;
 	
+	@NotEmpty(message = "Inform the family name")
 	private String familyName;
 	
 	private Date birthDate;

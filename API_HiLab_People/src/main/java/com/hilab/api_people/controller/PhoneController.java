@@ -19,8 +19,8 @@ import com.hilab.api_people.model.Address;
 import com.hilab.api_people.service.AddressService;
 
 @RestController
-@RequestMapping(value ="/address")
-public class AddressController {
+@RequestMapping(value ="/phones")
+public class PhoneController {
 	
 	@Autowired
 	private AddressService addressService;

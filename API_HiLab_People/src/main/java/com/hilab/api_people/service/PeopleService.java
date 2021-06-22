@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.hilab.api_people.dto.PeopleDTO;
 import com.hilab.api_people.model.People;
 import com.hilab.api_people.repository.PeopleRepository;
+import com.hilab.api_people.service.exception.ConstraintViolationException;
 import com.hilab.api_people.service.exception.ObjectNotFoundException;
 
 @Service
@@ -23,11 +24,18 @@ public class PeopleService {
 	
 	public People findById(String id) {
 		Optional<People> people = peopleRepository.findById(id); 
-		return people.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+		return people.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
 	}
 	
 	public People insert(People obj) {
-		return peopleRepository.insert(obj);
+		People people = null;
+		try {
+			people = peopleRepository.insert(obj);
+		} catch (ConstraintViolationException e) {
+			throw new ConstraintViolationException("Null field");
+
+		}
+		return people;
 	}
 	
 	public People fromDto(PeopleDTO obj) {
